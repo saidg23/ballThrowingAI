@@ -187,7 +187,7 @@ function getNextGen(netList, successRate)
         let childChromosome2 = breed(chromosome1, chromosome2);
         
         let mutation = getRand(0, 100);
-        if(mutation > 70)
+        if(mutation > 95)
         {
             let mutationIndex = Math.floor(getRand(0, childChromosome1.length));
             childChromosome1[mutationIndex] = getRand(-4, 4);
@@ -197,13 +197,13 @@ function getNextGen(netList, successRate)
         }
         
         mutation = getRand(0, 100);
-        if(mutation > 75)
+        if(mutation > 95)
         {
             let mutationIndex = Math.floor(getRand(0, childChromosome1.length));
-            childChromosome1[mutationIndex] += getRand(-0.02, 0.02);
+            childChromosome1[mutationIndex] += getRand(-0.1, 0.1);
             
             mutationIndex = Math.floor(getRand(0, childChromosome2.length));
-            childChromosome2[mutationIndex] = getRand(-0.02, 0.02);
+            childChromosome2[mutationIndex] = getRand(-0.1, 0.1);
         }
 
         newGen.push(new MLP(nInputs, nHidden, nOutputs, childChromosome1));

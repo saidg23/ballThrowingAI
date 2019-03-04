@@ -75,7 +75,7 @@ function eval()
         projectiles[i].pos.y = 500;
     }
     
-    target.x = getRand(600, 700);
+    //target.x = getRand(600, 700);
     target.y = getRand(100, 700);
     
     attempt++;
@@ -98,7 +98,7 @@ function simulate()
     if(projectiles[0].pos.x < target.x)
         requestAnimationFrame(simulate);
     else
-        requestAnimationFrame(eval);
+        eval();
 }
 
 function main()
@@ -106,18 +106,18 @@ function main()
     for(let i = 0; i < population; ++i)
     {
         netList[i].input([target.x, target.y]);
-        projectiles[i].launch(15, netList[i].getOutput()[0] * 15);
+        projectiles[i].launch(20, netList[i].getOutput()[0] * 25);
     }
     
     if(generation < maxGenerations)
         requestAnimationFrame(simulate);
 }
 
-let target = new Vector(getRand(600, 700), getRand(100, 700));
+let target = new Vector(700, getRand(100, 700));
 
 let population = 20;
 
-let maxGenerations = 100;
+let maxGenerations = 1000;
 let generation = 0;
 
 let maxAttempts = 10;
