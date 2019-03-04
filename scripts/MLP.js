@@ -77,12 +77,8 @@ function MLP(nInputs, nHidden, nOutputs, chromosome = null)
 
     this.outputActivationFunc = function(val)
     {
-        //if(val >= 0)
-            //return 1;
-        
-        //return 0;
-        
-        return this.hiddenActivationFunc(val);
+        //return Math.max(0, val);
+        return Math.tanh(val);
     }
 
     this.input = function(input)
@@ -191,7 +187,7 @@ function getNextGen(netList, successRate)
         let childChromosome2 = breed(chromosome1, chromosome2);
         
         let mutation = getRand(0, 100);
-        if(mutation > 95)
+        if(mutation > 70)
         {
             let mutationIndex = Math.floor(getRand(0, childChromosome1.length));
             childChromosome1[mutationIndex] = getRand(-4, 4);
@@ -201,7 +197,7 @@ function getNextGen(netList, successRate)
         }
         
         mutation = getRand(0, 100);
-        if(mutation > 98)
+        if(mutation > 75)
         {
             let mutationIndex = Math.floor(getRand(0, childChromosome1.length));
             childChromosome1[mutationIndex] += getRand(-0.02, 0.02);
@@ -217,7 +213,7 @@ function getNextGen(netList, successRate)
     return newGen;
 }
 
-function getSuccessRate(fitnesses)
+function getSuccessRates(fitnesses)
 {
     let sum = 0
     for(let i = 0; i < fitnesses.length; ++i)
@@ -225,15 +221,15 @@ function getSuccessRate(fitnesses)
         sum += fitnesses[i];
     }
     
-    let successRate = [];
+    let successRates = [];
     let prev = 0;
     for(let i = 0; i < fitnesses.length; ++i)
     {
-        successRate.push(prev + fitnesses[i] / sum);
-        prev = successRate[i];
+        successRates.push(prev + fitnesses[i] / sum);
+        prev = successRates[i];
     }
     
-    return successRate;
+    return successRates;
 }
 
 function sortNeuralNets(neuralNets, fitnesses)
